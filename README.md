@@ -4,7 +4,7 @@
 
 **Request decorator** 
 
-- **@before_request**
+- `@before_request`
 
 This decorator to registers a function to run before each request. It will apply to all requests within the app, if you have no other blueprints. If you have one or more blueprints, this decorator will only apply to particular blueprint
 
@@ -42,11 +42,25 @@ def before_request():
 
 after declaration of `def before_request()`, all other views function will call `before_request` before they get to run.
 
-- **@after_request**
+- `@after_request`
 
 This decorator to registers a function to run after each request
 
-- **@before_app_request**
+- `@before_app_request`
 
 This decorator will apply to all requests within the app, no matter how many blueprints you have. But this method only belongs to `Blueprint` class. Not in `Flask`.
 
+
+## Helper functions
+
+- `flask.url_for(endpoint, **values)`
+
+Generates a URL to the given endpoint with the method provided.
+
+Variable arguments that are unknown to the target endpoint are appended to the generated URL as query arguments. If the value of a query argument is None, the whole pair is skipped. In case blueprints are active you can shortcut references to the same blueprint by prefixing the local endpoint with a dot (.).
+
+This will reference the index function local to the current blueprint:
+
+```python
+url_for('.index')
+```
